@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="stytle.css">
+    </head>
+    <body>
+        <div id='app'>
+            <h1>Thumb Hover Styles</h1>
+            <div class='gallery-styles'>
+              <span v-for='s in 10' :class='{active: "style"+s == style}' @click='changeStyle(s)'>style {{s}}</span>
+            </div>
+            <div class='gallery' :data-style='style'>
+              <span class='container' v-for='id in images'>
+                      <span class='image-wrapper'>
+                          <img :src="'https://source.unsplash.com/'+id" alt="">
+                      </span>
+              <span class='title'>Lorem ipsum dolor sit amet</span>
+              <span class='desc'>Beatae quam nor laboris yet eaque incididunt but nequeporro.</span>
+              </span>
+            </div>
+          </div>
+        
+        <script src="script.js" async defer></script>
+    </body>
+</html>

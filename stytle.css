@@ -1,0 +1,602 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins");
+html {
+  font-size: 1.4vmin;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: url("http://cdn.osxdaily.com/wp-content/uploads/2016/02/dark-blue-texture-wallpaper.jpg");
+  background-repeat: repeat;
+  background-size: cover;
+}
+body * {
+  box-sizing: border-box;
+}
+body *::before, body *::after {
+  box-sizing: border-box;
+}
+body #app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vmin;
+  transform: translateX(-50%);
+  left: 50%;
+  position: fixed;
+}
+body #app h1 {
+  color: white;
+  font-weight: bold;
+  font-size: 3rem;
+}
+body #app .gallery-styles {
+  display: flex;
+  padding: 1vmin 0;
+  flex-wrap: wrap;
+  max-width: 90%;
+}
+body #app .gallery-styles span {
+  background-color: rgba(255, 255, 255, 0.6);
+  padding: 0.5rem 1rem;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  margin: 0.5rem;
+  transition: all 0.3s;
+}
+body #app .gallery-styles span.active {
+  background-color: white;
+}
+body #app .gallery-styles span:hover:not(.acitve) {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+body #app .gallery {
+  height: 75vmin;
+  width: 100%;
+  display: grid;
+  grid-gap: 1vmin;
+  grid-template-columns: repeat(3, 33%);
+  grid-template-rows: 46% 27% 27%;
+}
+body #app .gallery .container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+body #app .gallery .container:nth-child(1) {
+  grid-column: 1 / 3;
+}
+body #app .gallery .container:nth-child(1) .title {
+  font-size: 3em;
+}
+body #app .gallery .container:nth-child(1) .desc {
+  font-size: 1.5em;
+}
+body #app .gallery .container:nth-child(2) .image-wrapper img {
+  max-width: initial;
+  max-height: 100%;
+}
+body #app .gallery .container .image-wrapper {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: 0;
+  background-color: lightblue;
+}
+body #app .gallery .container .image-wrapper img {
+  max-width: 120%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+body #app .gallery .container .title {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  z-index: 2;
+  font-size: 1.3rem;
+  cursor: default;
+}
+body #app .gallery .container .desc {
+  width: 100%;
+  text-align: center;
+  z-index: 2;
+  padding: 1rem;
+  cursor: default;
+}
+body #app .gallery[data-style='style1'] .container {
+  overflow: hidden;
+}
+body #app .gallery[data-style='style1'] .container::before {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  bottom: 100%;
+  right: 100%;
+  width: 200%;
+  height: 250%;
+  transform: rotate(-45deg);
+  content: "";
+  transition: all 0.5s ease-out;
+  z-index: 1;
+}
+body #app .gallery[data-style='style1'] .container:hover::before {
+  right: -50%;
+  bottom: -50%;
+}
+body #app .gallery[data-style='style1'] .container:hover .title, body #app .gallery[data-style='style1'] .container:hover .desc {
+  opacity: 1;
+  transform: scale(1) translateY(0%);
+  transition: all 0.3s ease-in 0.3s;
+}
+body #app .gallery[data-style='style1'] .container .title, body #app .gallery[data-style='style1'] .container .desc {
+  opacity: 0;
+  transition: all 0.3s ease-in 0s;
+  transform: translateY(20%);
+  color: white;
+}
+body #app .gallery[data-style='style1'] .container .title {
+  text-transform: uppercase;
+  font-weight: bold;
+  transform: translateY(-20%);
+}
+body #app .gallery[data-style='style2'] .container {
+  overflow: hidden;
+  perspective: 300px;
+  transform-style: preserve-3d;
+}
+body #app .gallery[data-style='style2'] .container::before {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  content: "";
+  transition: all 0.3s ease-out;
+  z-index: 1;
+  opacity: 0;
+}
+body #app .gallery[data-style='style2'] .container:hover::before {
+  opacity: 1;
+}
+body #app .gallery[data-style='style2'] .container:hover .title, body #app .gallery[data-style='style2'] .container:hover .desc {
+  opacity: 1;
+  transform: rotateX(0deg);
+  transition: all 0.3s ease-in 0.1s;
+}
+body #app .gallery[data-style='style2'] .container .title, body #app .gallery[data-style='style2'] .container .desc {
+  opacity: 0;
+  transition: all 0.3s ease-in 0s;
+  transform: rotateX(90deg);
+  color: white;
+  background-color: rgba(255, 255, 255, 0.1);
+  transform-origin: bottom center;
+  width: initial;
+  padding: 0.1em 1em;
+  margin: 0.1em 0;
+}
+body #app .gallery[data-style='style2'] .container .title {
+  text-transform: uppercase;
+  font-weight: bold;
+  transform: rotateX(-90deg);
+  transform-origin: top center;
+}
+body #app .gallery[data-style='style3'] .container {
+  overflow: hidden;
+}
+body #app .gallery[data-style='style3'] .container::before {
+  background: linear-gradient(transparent 20%, rgba(255, 255, 255, 0.2) 20%, rgba(255, 255, 255, 0.2) 30%, transparent 30%, transparent 60%, rgba(255, 255, 255, 0.2) 60%, rgba(255, 255, 255, 0.2) 65%, transparent 65%, transparent 70%, rgba(255, 255, 255, 0.2) 70%, rgba(255, 255, 255, 0.2) 85%, transparent 85%);
+  position: absolute;
+  bottom: 100%;
+  right: 100%;
+  width: 200%;
+  height: 200%;
+  transform: rotate(-45deg);
+  content: "";
+  transition: all 0.5s ease-out;
+  z-index: 1;
+}
+body #app .gallery[data-style='style3'] .container:hover::before {
+  right: -50%;
+  bottom: -50%;
+}
+body #app .gallery[data-style='style3'] .container:hover .title, body #app .gallery[data-style='style3'] .container:hover .desc {
+  opacity: 1;
+  transform: scale(1) translateY(0%);
+  transition: all 0.3s ease-in 0.3s;
+}
+body #app .gallery[data-style='style3'] .container:hover .image-wrapper img {
+  transform: translate(-50%, -50%) scale(1.4);
+}
+body #app .gallery[data-style='style3'] .container .title, body #app .gallery[data-style='style3'] .container .desc {
+  opacity: 0;
+  transition: all 0.3s ease-in 0s;
+  transform: translateY(20%);
+  color: white;
+  text-shadow: 0 0 0.5em black;
+}
+body #app .gallery[data-style='style3'] .container img {
+  transition: all 0.4s linear;
+}
+body #app .gallery[data-style='style3'] .container .title {
+  text-transform: uppercase;
+  font-weight: bold;
+  transform: translateY(-20%);
+}
+body #app .gallery[data-style='style4'] .container {
+  overflow: hidden;
+  background-color: #2980b9;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease-in;
+}
+body #app .gallery[data-style='style4'] .container:hover {
+  padding: 0.5em 0.5em 0 0.5em;
+}
+body #app .gallery[data-style='style4'] .container:hover .title {
+  max-height: 100%;
+}
+body #app .gallery[data-style='style4'] .container .title {
+  color: white;
+  max-height: 0;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-align: left;
+  transition: all 0.3s ease-in;
+}
+body #app .gallery[data-style='style4'] .container .image-wrapper {
+  position: relative;
+  height: 100%;
+}
+body #app .gallery[data-style='style4'] .container .desc {
+  display: none;
+}
+body #app .gallery[data-style='style5'] .container {
+  overflow: hidden;
+  background-color: #2980b9;
+  display: flex;
+  flex-direction: column;
+  padding: 0 2em;
+  justify-content: flex-end;
+}
+body #app .gallery[data-style='style5'] .container:hover .desc {
+  opacity: 1;
+  transform: translateY(0);
+}
+body #app .gallery[data-style='style5'] .container:hover .title {
+  transform: translateY(-5%);
+}
+body #app .gallery[data-style='style5'] .container:hover img {
+  filter: blur(3px);
+}
+body #app .gallery[data-style='style5'] .container img {
+  transition: all 0.3s ease-in;
+}
+body #app .gallery[data-style='style5'] .container .title {
+  transition: all 0.3s ease-in;
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-align: left;
+  top: unset;
+  order: 2;
+  text-shadow: 0.03em 0.03em 0.05em black;
+  transform: translateY(-15%);
+}
+body #app .gallery[data-style='style5'] .container .desc {
+  order: 1;
+  text-align: left;
+  color: white;
+  padding: 1rem 0;
+  transform: translateY(50%);
+  opacity: 0;
+  transition: all 0.3s ease-in;
+}
+body #app .gallery[data-style='style6'] .container {
+  overflow: hidden;
+}
+body #app .gallery[data-style='style6'] .container::before, body #app .gallery[data-style='style6'] .container::after {
+  background-color: rgba(255, 255, 255, 0.5);
+  position: absolute;
+  top: 0;
+  right: 50%;
+  width: 0%;
+  height: 100%;
+  content: "";
+  transition: all 0.3s ease-out;
+  z-index: 1;
+  transform: skew(-45deg);
+}
+body #app .gallery[data-style='style6'] .container::after {
+  left: 50%;
+}
+body #app .gallery[data-style='style6'] .container:hover::before, body #app .gallery[data-style='style6'] .container:hover::after {
+  width: 120%;
+}
+body #app .gallery[data-style='style6'] .container:hover .title, body #app .gallery[data-style='style6'] .container:hover .desc {
+  opacity: 1;
+  transform: translateY(0);
+}
+body #app .gallery[data-style='style6'] .container:hover img {
+  transform: translate(-50%, -50%) scale(1.2);
+}
+body #app .gallery[data-style='style6'] .container .title, body #app .gallery[data-style='style6'] .container .desc {
+  opacity: 0;
+  transition: all 0.3s ease-in 0s;
+  transform: translateY(20%);
+  color: black;
+  width: initial;
+  padding: 0.1em 1em;
+  margin: 0.1em 0;
+}
+body #app .gallery[data-style='style6'] .container .title {
+  text-transform: uppercase;
+  font-weight: bold;
+  transform: translateY(-20%);
+  transform-origin: top center;
+}
+body #app .gallery[data-style='style6'] .container img {
+  transition: all 0.3s;
+}
+body #app .gallery[data-style='style7'] .container {
+  overflow: hidden;
+}
+body #app .gallery[data-style='style7'] .container::before {
+  background-image: linear-gradient(135deg, #67B26F, #4ca2cd);
+  position: absolute;
+  top: 0;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  content: "";
+  transition: all 0.3s ease-out;
+  z-index: 1;
+  opacity: 0.3;
+}
+body #app .gallery[data-style='style7'] .container::after {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 80%;
+  height: 80%;
+  content: "";
+  border: 0.15em solid white;
+  z-index: 2;
+  transform: scale(1.5);
+  transition: all 0.3s;
+}
+body #app .gallery[data-style='style7'] .container:hover::before {
+  opacity: 0.7;
+}
+body #app .gallery[data-style='style7'] .container:hover::after {
+  transform: scale(1);
+}
+body #app .gallery[data-style='style7'] .container:hover .desc {
+  opacity: 1;
+  transform: translateY(-20%);
+}
+body #app .gallery[data-style='style7'] .container:hover .title {
+  transform: translateY(-20%);
+}
+body #app .gallery[data-style='style7'] .container:hover img {
+  transform: translate(-50%, -50%) scale(1);
+}
+body #app .gallery[data-style='style7'] .container .desc {
+  opacity: 0;
+  transition: all 0.3s linear;
+  color: #2c3e50;
+  width: initial;
+  padding: 0.1em 1em;
+  margin: 0.1em 0;
+  position: absolute;
+  bottom: 10%;
+  width: 80%;
+  left: 10%;
+  transform: translateY(20%);
+  text-shadow: 0.05em 0.05em 0.1em rgba(255, 255, 255, 0.5);
+}
+body #app .gallery[data-style='style7'] .container .title {
+  text-transform: uppercase;
+  font-weight: bold;
+  width: 70%;
+  opacity: 1;
+  transition: all 0.2s linear;
+  transform: translateY(10%);
+  text-shadow: 0.05em 0.05em 0.1em rgba(255, 255, 255, 0.5);
+  color: #2c3e50;
+}
+body #app .gallery[data-style='style7'] .container img {
+  transition: all 0.3s;
+  transform: translate(-50%, -50%) scale(1.2);
+}
+body #app .gallery[data-style='style8'] .container {
+  overflow: hidden;
+}
+body #app .gallery[data-style='style8'] .container::before {
+  background-color: rgba(255, 255, 255, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  content: "";
+  transition: all 0.4s ease-in-out;
+  z-index: 1;
+  transform: translateX(-100%);
+}
+body #app .gallery[data-style='style8'] .container:hover::before {
+  transform: translateX(0);
+}
+body #app .gallery[data-style='style8'] .container:hover .desc {
+  opacity: 1;
+  transform: translateY(-20%);
+}
+body #app .gallery[data-style='style8'] .container:hover .title {
+  transform: translateY(-20%);
+}
+body #app .gallery[data-style='style8'] .container:hover img {
+  transform: translate(-50%, -50%) scale(1);
+}
+body #app .gallery[data-style='style8'] .container .desc {
+  opacity: 0;
+  transition: all 0.4s linear;
+  color: #2c3e50;
+  width: initial;
+  padding: 0.1em 1em;
+  margin: 0.1em 0;
+  position: absolute;
+  bottom: 10%;
+  width: 80%;
+  left: 10%;
+  transform: translateY(20%);
+  text-shadow: 0.05em 0.05em 0.1em rgba(255, 255, 255, 0.5);
+}
+body #app .gallery[data-style='style8'] .container .title {
+  text-transform: uppercase;
+  font-weight: bold;
+  width: 70%;
+  opacity: 1;
+  transition: all 0.3s linear;
+  transform: translateY(10%);
+  text-shadow: 0.05em 0.05em 0.1em rgba(255, 255, 255, 0.5);
+  color: #2c3e50;
+}
+body #app .gallery[data-style='style8'] .container img {
+  transition: all 0.4s;
+  transform: translate(-50%, -50%) scale(1.2);
+}
+body #app .gallery[data-style='style9'] .container {
+  overflow: hidden;
+}
+body #app .gallery[data-style='style9'] .container::before {
+  border: 2px solid rgba(255, 255, 255, 0);
+  position: absolute;
+  top: 10;
+  left: 10%;
+  width: 80%;
+  height: 80%;
+  content: "";
+  transition: all 0.3s linear;
+  z-index: 1;
+  transform: translateX(-20%);
+}
+body #app .gallery[data-style='style9'] .container:hover::before {
+  transform: translateX(0);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+body #app .gallery[data-style='style9'] .container:hover .desc {
+  opacity: 1;
+  transform: translate(0, -10%);
+}
+body #app .gallery[data-style='style9'] .container:hover .title {
+  transform: translate(-20%, -10%);
+  opacity: 1;
+}
+body #app .gallery[data-style='style9'] .container:hover img {
+  transform: translate(-40%, -50%) scale(1.2);
+  filter: blur(2px);
+}
+body #app .gallery[data-style='style9'] .container .desc {
+  opacity: 0;
+  transition: all 0.3s linear;
+  color: #2c3e50;
+  width: initial;
+  padding: 0.1em 1em;
+  margin: 0.1em 0;
+  position: absolute;
+  bottom: 10%;
+  width: 70%;
+  left: 15%;
+  transform: translate(-20%, -10%);
+  text-shadow: 0.05em 0.05em 0.1em rgba(255, 255, 255, 0.5);
+}
+body #app .gallery[data-style='style9'] .container .title {
+  text-transform: uppercase;
+  font-weight: bold;
+  width: 70%;
+  opacity: 1;
+  transition: all 0.3s linear;
+  left: 15%;
+  transform: translate(-40%, -10%);
+  text-shadow: 0.05em 0.05em 0.1em rgba(255, 255, 255, 0.5);
+  color: #2c3e50;
+  position: relative;
+  opacity: 0;
+}
+body #app .gallery[data-style='style9'] .container img {
+  transition: all 0.3s linear;
+  transform: translate(-50%, -50%) scale(1.2);
+}
+body #app .gallery[data-style='style10'] .container {
+  overflow: hidden;
+}
+body #app .gallery[data-style='style10'] .container::before, body #app .gallery[data-style='style10'] .container::after {
+  background-color: rgba(255, 255, 255, 0.5);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50%;
+  height: 150%;
+  content: "";
+  transition: all 0.3s linear;
+  z-index: 1;
+  transform: skew(-35deg) translateX(-140%);
+}
+body #app .gallery[data-style='style10'] .container::after {
+  left: 100%;
+  top: 0;
+  transform: skew(-35deg) translateX(40%);
+}
+body #app .gallery[data-style='style10'] .container:hover::before, body #app .gallery[data-style='style10'] .container:hover::after {
+  transform: skew(-35deg) translateX(-50%);
+}
+body #app .gallery[data-style='style10'] .container:hover .desc {
+  opacity: 1;
+  transform: translateY(-10%);
+}
+body #app .gallery[data-style='style10'] .container:hover .title {
+  transform: translateY(-10%);
+  opacity: 1;
+}
+body #app .gallery[data-style='style10'] .container:hover img {
+  transform: translate(-50%, -50%) scale(1);
+  filter: blur(2px);
+}
+body #app .gallery[data-style='style10'] .container .desc {
+  opacity: 0;
+  transition: all 0.3s linear;
+  color: #2c3e50;
+  width: initial;
+  padding: 0.1em 1em;
+  margin: 0.1em 0;
+  position: absolute;
+  bottom: 10%;
+  width: 70%;
+  left: 15%;
+  transform: translateY(-20%);
+  text-shadow: 0.05em 0.05em 0.1em rgba(255, 255, 255, 0.5);
+}
+body #app .gallery[data-style='style10'] .container .title {
+  text-transform: uppercase;
+  font-weight: bold;
+  width: 80%;
+  opacity: 1;
+  transition: all 0.3s linear;
+  transform: translateY(-20%);
+  text-shadow: 0.05em 0.05em 0.1em rgba(255, 255, 255, 0.5);
+  color: #2c3e50;
+  position: relative;
+  opacity: 0;
+  z-index: 10;
+}
+body #app .gallery[data-style='style10'] .container img {
+  transition: all 0.3s linear;
+  transform: translate(-50%, -50%) scale(1.2);
+}
